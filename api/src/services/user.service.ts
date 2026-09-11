@@ -1,5 +1,5 @@
 import users from "../mocks/user.mock.ts";
-import type { User, CreateUser } from "../types/user.type.ts";
+import type { User, CreateUser, UpdateUser } from "../types/user.type.ts";
 
 export function findAllUsers(): User[] {
   return users;
@@ -34,8 +34,21 @@ export function insertUser({
   return user;
 }
 
-function modifyUser(){
+export function modifyUser(id: number, {
+  name,
+  email,
+  password
+}: UpdateUser):User {
+  const user =  users.find(user => user.id === id);
 
+   if (!user)
+    throw new Error(`Usuário de Id ${id} não encontrado`);
+
+   if (name) user.name = name;
+   if (email) user.email = email;
+   if(password) user.password = password;
+
+   return user;
 }
 
 function removeUser(){
