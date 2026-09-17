@@ -37,14 +37,7 @@ export function updateUser(request: Request, response: Response): void {
 export function removeUser(request: Request, response: Response): void {
     const id = Number(request.params.id);
 
-    if (isNaN(id)) {
        
-        return response.status(400).json({
-            message: "ID inválido"
-        }) as unknown as void;  
-    }
-
-    
-    const user = UserService.removeUser(id);
-    response.status(200).json(user);
+    UserService.removeUser(id);
+    response.status(204).send();
 }
