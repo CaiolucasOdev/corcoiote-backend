@@ -34,18 +34,17 @@ export function updateUser(request: Request, response: Response): void {
   response.status(200).json(user);
 }
 
-export function removeUser(request: Request, response: Response): void{
-   const id = Number(request.params.id);
-   
-   if(isNaN(id)){
-  response.status(400).json({
-    message: "ID inválido"
-  });
-}
+export function removeUser(request: Request, response: Response): void {
+    const id = Number(request.params.id);
 
-   const user = UserService.removeUser(id)
-   
-   response.status(200).json(user);
-   
-   
+    if (isNaN(id)) {
+       
+        return response.status(400).json({
+            message: "ID inválido"
+        }) as unknown as void;  
+    }
+
+    
+    const user = UserService.removeUser(id);
+    response.status(200).json(user);
 }

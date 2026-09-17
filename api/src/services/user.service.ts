@@ -52,10 +52,12 @@ export function modifyUser(id: number, {
 }
 
 export function removeUser(id: number){
-  const user = users.filter(user => user.id !=id);
+  const user = users.findIndex(user => user.id ===id);
 
-  if (!user)
+  if (user === -1)
     throw new Error(`Usuário de Id ${id} não encontrado`);
+
+  users.splice(user, 1)
 
   return ('Usuário deletado com sucesso!')
 
