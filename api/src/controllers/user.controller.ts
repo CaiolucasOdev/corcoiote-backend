@@ -1,7 +1,7 @@
 import type {Request, Response } from 'express'
 import * as UserService from '../services/user.service.ts'
 import { request } from 'node:http';
-import type { CreateUser, UpdateUser } from '../types/user.type.ts';
+import type { CreateUser, UpdateUser, } from '../types/user.type.ts';
 
 export function getAllUsers(_request:Request ,response: Response): void{
   const users = UserService.findAllUsers();
@@ -32,4 +32,20 @@ export function updateUser(request: Request, response: Response): void {
   const user = UserService.modifyUser(id, {name, email, password})
 
   response.status(200).json(user);
+}
+
+export function removeUser(request: Request, response: Response): void{
+   const id = Number(request.params.id);
+   
+   if(isNaN(id)){
+  response.status(400).json({
+    message: "ID inválido"
+  });
+}
+
+   const user = UserService.removeUser(id)
+   
+   response.status(200).json(user);
+   
+   
 }

@@ -51,6 +51,12 @@ export function modifyUser(id: number, {
    return user;
 }
 
-function removeUser(){
+export function removeUser(id: number){
+  const user = users.filter(user => user.id !=id);
+
+  if (!user)
+    throw new Error(`Usuário de Id ${id} não encontrado`);
+
+  return ('Usuário deletado com sucesso!')
 
 }
