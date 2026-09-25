@@ -1,0 +1,13 @@
+-- CreateTable
+CREATE TABLE "costumers" (
+    "id" SERIAL NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "image_url" TEXT,
+
+    CONSTRAINT "costumers_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "costumers_email_key" ON "costumers"("email");
