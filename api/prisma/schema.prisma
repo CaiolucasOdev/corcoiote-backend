@@ -17,12 +17,13 @@ model User {
   @@map("users")
 }
 
-model Costumer {
+model Customer {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
   name String
   email String @unique
   imageUrl String? @map("image_url")
 
-  @@map("costumers")
+  @@map("customers")
 }
+
