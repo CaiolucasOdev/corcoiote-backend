@@ -1,29 +1,28 @@
-generator Client {
-  provider = "prisma-client"
-  output = "./generated"
+generator client { //quem vai criar no banco 
+    provider = "prisma-client" 
+    output = "./generated"
 }
 
-datasource db {
-  provider = "postgresql"
+datasource db { //qual vai ser o banco 
+    provider = "postgresql"
 }
 
-model User {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  password String
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@map("users")
+model User { // tabela do banco para usuario 
+    id Int @id @default(autoincrement())
+    name String
+    email String @unique
+    password String 
+    createdAt DateTime @default(now()) @map("created_at")
+    
+    @@map("users")
 }
 
-model Customer {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  name String
-  email String @unique
-  imageUrl String? @map("image_url")
+model Customer { // tabela do banco para clientes
+    id Int @id @default(autoincrement())
+    name String
+    email String @unique
+    imageUrl String? @map("image_url")
+    createdAt DateTime @default(now()) @map("created_at")
 
-  @@map("customers")
+    @@map("customers")
 }
-

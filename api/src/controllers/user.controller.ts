@@ -1,43 +1,50 @@
-import type {Request, Response } from 'express'
-import * as UserService from '../services/user.service.ts'
-import { request } from 'node:http';
-import type { CreateUser, UpdateUser, } from '../types/user.type.ts';
+import type { Request, Response } from "express";
+import * as UserService from "../services/user.service.ts";
+import type { CreatUser, UpdateUser } from "../types/user.type.ts";
 
-export function getAllUsers(_request:Request ,response: Response): void{
-  const users = UserService.findAllUsers();
 
-   response.status(200).json(users);
+export function getAllUsers(_request: Request, response: Response): void {
+    const users = UserService.findAllUsers();
+
+    response.status(200).json(users);
 }
 
-export function getUserById(request:Request ,response: Response): void{
- const id = Number(request.params.id); 
-  const user = UserService.findUserById(id);
+export function getUserById(request: Request, response: Response): void {
     
+    const id = Number(request.params.id);
 
-   response.status(200).json(user);
+    const userId = UserService.findUserById(id);
+
+    response.status(200).json(userId);
 }
 
-export function createUser(request: Request, response: Response): void{
-   const {name, email, password} = request.body as CreateUser;
+export function createUser(request: Request, response: Response): void {
+    
+    const { name, email, password } = request.body as CreatUser;
 
-   const user = UserService.insertUser({name, email, password})
+    const user = UserService.insertUser({ name, email, password });
 
-   response.status(201).json(user);
+    response.status(201).json(user);
+
 }
 
 export function updateUser(request: Request, response: Response): void {
-   const id = Number(request.params.id);
-   const {name, email, password} = request.body as UpdateUser;
 
-  const user = UserService.modifyUser(id, {name, email, password})
-
-  response.status(200).json(user);
-}
-
-export function removeUser(request: Request, response: Response): void {
     const id = Number(request.params.id);
 
-       
+    const { name, email, password } = request.body as UpdateUser;
+
+    const user = UserService.modifyUser(id, { name, email, password });
+
+    response.status(200).json(user);
+
+}
+
+export function deleteUser(request: Request,response: Response): void {
+
+    const id = Number(request.params.id);
+
     UserService.removeUser(id);
+
     response.status(204).send();
 }

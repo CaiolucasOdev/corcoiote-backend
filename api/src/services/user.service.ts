@@ -1,64 +1,34 @@
-import users from "../mocks/user.mock.ts";
-import type { User, CreateUser, UpdateUser } from "../types/user.type.ts";
+import prisma from "../lib/prisma.ts";
+import type { CreateUser, UpdateteUser } from "../schemas/user.schema.ts";
+import type { User } from "../types/user.type.ts";
 
-export function findAllUsers(): User[] {
-  return users;
+export async function findAllUsers(): Promise<User[]>{
+    return await  prisma.user.findMany({ orderBy: { createdAt: 'desc' } });
 }
 
-export function findUserById(id: number): User {
- const user =  users.find(user => user.id === id);
+export async function finduserById( id:number ):Promise<User>{
+    const user =  await prisma.user.findUnique({ where: { id } });
 
- if (!user)
-  throw new Error(`Usuário de Id ${id} não encontrado`);
+    if (!user) throw new Error ('Usuario não enconstrado');
 
- return user;
- 
- }
-  
-export function insertUser({
-  name,
-  email,
-  password
-}:CreateUser): User {
-
-
-  const user: User = {
-    id: users[users.length - 1].id +1,
-    name,
-    email,
-    password
-  };
-
-  users[users.length] = user;
-
-  return user;
+    return user;
 }
 
-export function modifyUser(id: number, {
-  name,
-  email,
-  password
-}: UpdateUser):User {
-  const user =  users.find(user => user.id === id);
-
-   if (!user)
-    throw new Error(`Usuário de Id ${id} não encontrado`);
-
-   if (name) user.name = name;
-   if (email) user.email = email;
-   if(password) user.password = password;
-
-   return user;
+export async function insertUser(datas: CreateUser):Promise<User>{
+    return await prisma.user.create ({ data: datas })
 }
 
-export function removeUser(id: number){
-  const user = users.findIndex(user => user.id ===id);
+export async function modifyUser( id: number, datas: UpdateteUser ):Promise<User>{
+    await finduserById(id);
 
-  if (user === -1)
-    throw new Error(`Usuário de Id ${id} não encontrado`);
+    const user = await prisma.user.update({
+        where: {id},
+        data: datas
+    })
+    return user;
+}
 
-  users.splice(user, 1)
-
-  return ('Usuário deletado com sucesso!')
-
+export async function removeUser(id: number):Promise<void>{
+    await finduserById(id);
+    await prisma.user.delete({where: {id} });
 }

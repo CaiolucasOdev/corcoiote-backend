@@ -1,14 +1,31 @@
-import express, { response } from 'express';
-import routerUsers from './routes/user.route.ts';
+import express from 'express';
+// import routerUsers from './routes/user.route.ts';
+import path from 'node:path';
+
+const client = path.join(import.meta.dirname, '..', '..', 'web');
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/users', routerUsers);
+//app.use('/users', routerUsers);
+
+app.use(express.static(client));
 
 app.listen(process.env.PORT);
 
 
 
 
+
+/* http.createServer((request, response) => {
+
+    if (request.url !== '/users'){
+        response.writeHead(404, { 'content-type': 'application/json' });
+       response.end(JSON.stringify({ message: 'Recurso não encontrado.'}));
+        return;
+    }
+    response.writeHead(200, { 'content-type': 'application/json' });
+    response.end(JSON.stringify(users));
+
+}).listen(3000); */
