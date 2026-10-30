@@ -1,6 +1,7 @@
 import { Invoice } from "./invoiceType.tsx"
 
-import {formatCurrency} from "./utils.ts"
+import {formatCurrency, formatDate, formatStatus} from "./utils.ts"
+
 
 interface InvoiceRowProps {
 
@@ -14,8 +15,8 @@ export default function InvoiceRow ({data}: InvoiceRowProps){
     return <tr>
         <td>{customer.name}</td>
         <td>{formatCurrency(amount)}</td>
-        <td>{issueDate}</td>
-        <td>{dueDate}</td>
-        <td>{status}</td>
+        <td>{formatDate(issueDate)}</td>
+        <td>{formatDate(dueDate)}</td>
+        <td>{formatStatus(status)}</td>
     </tr>
 }
