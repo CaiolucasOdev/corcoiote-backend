@@ -1,7 +1,7 @@
 import InvoiceTable from "./InvoiceTable.tsx"
-import {Invoice} from './invoiceType.ts'
+import { Invoice } from './invoiceType.ts'
 
- const invoices: Invoice[] = [{
+const invoices: Invoice[] = [{
     id: 1,
     amount: 520354,
     status: 'pending',
@@ -36,8 +36,9 @@ import {Invoice} from './invoiceType.ts'
     }
 }];
 
-export default function App(){
- return <> 
-  <InvoiceTable datas={invoices} />
-  </>
+export default function App() {
+    return <>
+        <h1>Corcoiote</h1>
+        <InvoiceTable datas={invoices} />
+    </>
 }
