@@ -1,22 +1,21 @@
-import { Invoice } from "./invoiceType.tsx"
+import type { Invoice } from './invoiceType.tsx';
 
-import {formatCurrency, formatDate, formatStatus} from "./utils.ts"
-
+import { formatCurrency, formatDate, formatStatus } from './utils.ts';
 
 interface InvoiceRowProps {
-
-    data: Invoice;
+  data: Invoice;
 }
 
-export default function InvoiceRow ({data}: InvoiceRowProps){
+export default function InvoiceRow({ data }: InvoiceRowProps) {
+  const { customer, amount, issueDate, dueDate, status } = data; //forma desestruturada de data
 
-    const {customer, amount, issueDate, dueDate, status} = data; //forma desestruturada de data
-
-    return <tr>
-        <td>{customer.name}</td>
-        <td>{formatCurrency(amount)}</td>
-        <td>{formatDate(issueDate)}</td>
-        <td>{formatDate(dueDate)}</td>
-        <td>{formatStatus(status)}</td>
+  return (
+    <tr>
+      <td>{customer.name}</td>
+      <td>{formatCurrency(amount)}</td>
+      <td>{formatDate(issueDate)}</td>
+      <td>{formatDate(dueDate)}</td>
+      <td>{formatStatus(status)}</td>
     </tr>
+  );
 }

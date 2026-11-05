@@ -1,8 +1,12 @@
 {
-    "name": "clickfinanci",
-    "autor": "Alexandre Junior",
-    "scripts": {},
+    "name": "ControleFinanceiro",
+    "autor": "Caio Lucas",
+    "scripts": {
+        "check:web": "biome check ./web", 
+        "fix:web": "biome check --write ./web"
+    },
     "devDependencies": {
-        "@biomejs/biome": "2.5.15"
+        "@biomejs/biome": "2.5.15",
+        "biome": "^0.3.3"
     }
 }

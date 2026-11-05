@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+  "compilerOptions": {
     "target": "esnext",
     "lib": ["ESnext", "DOM"],
     "module": "esnext",
@@ -7,9 +7,10 @@
     "jsx": "react-jsx",
     "strict": true,
     "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
-},
+  },
 
-"include": ["src"]
+  "include": ["src"]
 }
