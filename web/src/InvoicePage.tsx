@@ -44,7 +44,10 @@ const invoices: Invoice[] = [
 export default function InvoicePage() {
     return <>
     <h1>Faturas</h1>
+   
+    <div className="panel">
      <InvoiceTable datas={invoices} />
+    </div>
      </>
 
 }
